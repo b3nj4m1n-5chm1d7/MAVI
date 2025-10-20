@@ -131,6 +131,9 @@ xcopy "$(SolutionDir)..\lib\vld\32-bit\Microsoft.DTfW.DHL.manifest" "$(OutDir)" 
 xcopy "$(SolutionDir)..\lib\vld\64-bit\dbghelp.dll" "$(OutDir)" /y /d
 xcopy "$(SolutionDir)..\lib\vld\64-bit\Microsoft.DTfW.DHL.manifest" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
+    <Xdcmake>
+      <AdditionalDocumentFile>C:\Users\Desktop\Downloads\Documentos MAVI\Raylib-vs2022 Limpio\Componentes</AdditionalDocumentFile>
+    </Xdcmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
