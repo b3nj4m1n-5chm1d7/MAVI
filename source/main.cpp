@@ -11,101 +11,94 @@ int main(void)
     //Abre una ventana de 1024x768 píxeles
     InitWindow(1024, 768, "Sprites en movimiento");
 
+    //inicia el sistema de audio
+    InitAudioDevice();
+
     //Carga las texturas seleccionadas
-    Texture2D sprite1 = LoadTexture("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/dino.png");
-    Texture2D sprite2 = LoadTexture("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/sans.png");
+    Texture2D sprite = LoadTexture("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/sans.png");
+
+    //Carga los sonidos seleccionados
+    Sound sonido = LoadSound("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/salto.mp3");
 
     //Añade un filtro bilineal
-    SetTextureFilter(sprite1, TEXTURE_FILTER_BILINEAR);
-    SetTextureFilter(sprite2, TEXTURE_FILTER_BILINEAR);
+    SetTextureFilter(sprite, TEXTURE_FILTER_BILINEAR);
 
-    //Propiedades del primer sprite
-    Vector2 pos1 = { 200.0f, 250.0f };
-    Vector2 vel1 = { 2.0f, 1.5f };
-    float rot1 = 0.0f;
-    float escala1 = 0.6f;
-    Color color1 = RED;
+    //Propiedades del sprite
+    Vector2 pos = { 450.0f, 250.0f };
+    Vector2 actual = pos;
+    float escala = 0.2f;
+    Color color = BLUE;
+    float velocidad = 5.0f;
 
-    //Propiedades del segundo sprite
-    Vector2 pos2 = { 450.0f, 250.0f };
-    Vector2 vel2 = { -2.5f, 1.0f };
-    float rot2 = 0.0f;
-    float escala2 = 0.2f;
-    Color color2 = BLUE;
+    Color fondo = RED;
 
     SetTargetFPS(60);
 
     // Bucle principal
     while (!WindowShouldClose())
     {
-        //Rota los sprites en una determinada velocidad
-        rot1 += 0.5f;
-        rot2 -= 1.0f;
+        //Detecta si se presiona el espacio para hacer saltar al personaje
+        if (IsKeyPressed(KEY_SPACE)) {
+            pos.y -= velocidad;
+            PlaySound(sonido);
+        }
 
-        //Movimiento automático
-        pos1.x += vel1.x;
-        pos1.y += vel1.y;
-        pos2.x += vel2.x;
-        pos2.y += vel2.y;
+        //Detecta si se presiona la tecla izquierda para mover el personaje en esa dirección
+        if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_A)) {
+            pos.x -= velocidad;
+        }
 
-        //Rebotar en bordes
-        if (pos1.x <= 0 || pos1.x + sprite1.width * escala1 >= GetScreenWidth()) vel1.x *= -1;
-        if (pos1.y <= 0 || pos1.y + sprite1.height * escala1 >= GetScreenHeight()) vel1.y *= -1;
+        //Detecta si se presiona la flecha derecha para mover al personaje en esa dirección
+        if(IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_D)) {
+            pos.x += velocidad;
+        }
+        
+        //Reinicia la posición
+        if (IsKeyPressed(KEY_R)) {
+            pos = actual;
+        }
 
-        if (pos2.x <= 0 || pos2.x + sprite2.width * escala2 >= GetScreenWidth()) vel2.x *= -1;
-        if (pos2.y <= 0 || pos2.y + sprite2.height * escala2 >= GetScreenHeight()) vel2.y *= -1;
-
-        //Intercambio de las propiedades de los sprites
-        if (IsKeyPressed(KEY_SPACE))
-        {
-            //Intercambiar todas las propiedades
-            Vector2 tempPos = pos1; pos1 = pos2; pos2 = tempPos;
-            Vector2 tempVel = vel1; vel1 = vel2; vel2 = tempVel;
-            float tempRot = rot1; rot1 = rot2; rot2 = tempRot;
-            float tempEscala = escala1; escala1 = escala2; escala2 = tempEscala;
-            Color tempColor = color1; color1 = color2; color2 = tempColor;
-
-            //Intercambiar también las texturas (opcional, más “efecto visual”)
-            Texture2D tempTex = sprite1; sprite1 = sprite2; sprite2 = tempTex;
+        //Detecta si se presionó el click izquierdo del mouse
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            fondo = BLUE;
+        }
+        else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            fondo = RED;
         }
 
         //Comienza a dibujar
         BeginDrawing();
 
         //Cambia el fondo de la pantalla
-        ClearBackground(BLACK);
+        ClearBackground(fondo);
 
         //Dibuja los sprites
-        DrawTextureEx(sprite1, pos1, rot1, escala1, color1);
-        DrawTextureEx(sprite2, pos2, rot2, escala2, color2);
+        DrawTextureEx(sprite, pos, 0.0f, escala, color);
 
-        //Texto informativo
-        DrawText("Presiona [ESPACIO] para intercambiar propiedades (Swap visual)", 10, 720, 20, DARKGRAY);
+        //Se indican los controles
+        DrawText("Presiona <- o -> para desplazar al personaje", 10, 700, 20, BLACK);
+        DrawText("Presiona ESPACIO para saltar", 10, 730, 20, BLACK);
 
-        //Informacion del primer sprite
-        DrawText("Sprite 1:", 10, 20, 20, BLUE);
-        DrawText(TextFormat("Posicion: (%.1f, %.1f)", pos1.x, pos1.y), 20, 50, 18, GRAY);
-        DrawText(TextFormat("Rotacion: %.1f", rot1), 20, 75, 18, GRAY);
-        DrawText(TextFormat("Escala: %.2f", escala1), 20, 95, 18, GRAY);
-        DrawText(TextFormat("Color (RGBA): (%d, %d, %d, %d)", color1.r, color1.g, color1.b, color1.a), 20, 115, 18, GRAY);
-        DrawText(TextFormat("Velocidad: (%.1f, %.1f)", vel1.x, vel1.y), 20, 135, 18, GRAY);
+        //Indica la posición actual del personaje en el eje X
+        DrawText(TextFormat("Posicion: %.0f %.0f", pos.x, pos.y), 10, 20, 30, DARKGREEN);
 
-        //informacion del segundo sprite
-        DrawText("Sprite 2:", 750, 20, 20, RED);
-        DrawText(TextFormat("Posicion: (%.1f, %.1f)", pos2.x, pos2.y), 760, 50, 18, GRAY);
-        DrawText(TextFormat("Rotacion: %.1f", rot2), 760, 75, 18, GRAY);
-        DrawText(TextFormat("Escala: %.2f", escala2), 760, 95, 18, GRAY);
-        DrawText(TextFormat("Color (RGBA): (%d, %d, %d, %d)", color2.r, color2.g, color2.b, color2.a), 760, 115, 18, GRAY);
-        DrawText(TextFormat("Velocidad: (%.1f, %.1f)", vel2.x, vel2.y), 760, 135, 18, GRAY);
+        DrawText("Presiona R para reiniciar posicion", 500, 20, 30, DARKBLUE);
+
+        //Muestra un texto cuando se presiona la tecla M
+        if (IsKeyDown(KEY_M)) {
+            DrawText("Estoy aprendiendo en Mavi", 400, 500, 20, WHITE);
+        }
 
         //Termina de dibujar
         EndDrawing();
     }
 
     //Liberar memoria
-    UnloadTexture(sprite1);
-    UnloadTexture(sprite2);
+    UnloadTexture(sprite);
+    UnloadSound(sonido);
 
+    //Termina es sistema de audio
+    CloseAudioDevice();
     //Cierra la ventana
     CloseWindow();
 
