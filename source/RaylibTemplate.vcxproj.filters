@@ -18,19 +18,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Personaje.cpp">
+    <ClCompile Include="Pelota.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Plataformas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Moneda.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Puerta.cpp">
+    <ClCompile Include="Borde_Ventana.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,19 +29,10 @@
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Personaje.h">
+    <ClInclude Include="Pelota.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Plataformas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Moneda.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Puerta.h">
+    <ClInclude Include="Borde_Ventana.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
