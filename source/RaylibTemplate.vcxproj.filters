@@ -18,10 +18,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pelota.cpp">
+    <ClCompile Include="Objetivo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Borde_Ventana.cpp">
+    <ClCompile Include="Torreta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="JUEGO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,10 +32,13 @@
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pelota.h">
+    <ClInclude Include="Objetivo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Borde_Ventana.h">
+    <ClInclude Include="Torreta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="JUEGO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

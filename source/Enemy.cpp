@@ -8,29 +8,9 @@ Vector2 pos3 = { 1175, 100 };
 float velocity = 5.0f;
 float scale = 0.25f;
 
-//Se le otorga una HitBox a los enemigos
-Rectangle Enemy::EnemyHitBox1(){
-	return Rectangle{ pos1.x, pos1.y, float(enemy.width * scale), float(enemy.height * scale) };
-}
-
-Rectangle Enemy::EnemyHitBox2(){
-	return Rectangle{ pos2.x, pos2.y, float(enemy.width * scale), float(enemy.height * scale) };
-}
-
-Rectangle Enemy::EnemyHitBox3(){
-	return Rectangle{ pos3.x, pos3.y, float(enemy.width * scale), float(enemy.width * scale) };
-}
-
-void Enemy::drawhitbox(bool isColliding){
-	Color outlinecolor = isColliding ? RED : BLACK;
-	DrawRectangleLines(pos1.x, pos1.y, enemy.width * scale, enemy.height * scale, outlinecolor);
-	DrawRectangleLines(pos2.x, pos2.y, enemy.width * scale, enemy.height * scale, outlinecolor);
-	DrawRectangleLines(pos3.x, pos3.y, enemy.width * scale, enemy.height * scale, outlinecolor);
-}
-
 //Carga las texturas del enemigo
 void Enemy::loadEnem() {
-	enemy = LoadTexture("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/Sprites/vengamosca.png");
+	enemy = LoadTexture("Componentes/Sprites/vengamosca.png");
 };
 
 //Se dibujan a los enemigos

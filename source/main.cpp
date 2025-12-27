@@ -5,50 +5,17 @@
 #include <stdbool.h>
 #endif
 #include "raylib.h"
-#include "Pelota.h"
-#include "Borde_Ventana.h"
+#include "JUEGO.h"
 
 //Bucle inicial
 int main(void){
 
-    //Carga una pantalla de 800 x 600 pixeles
-    InitWindow(800,600,"Pelota");
-    
-    //Se llama a las clases
-    Pelota pelo;
-    Borde_Ventana borde;
+    //Carga una pantalla de 1280 x 720 pixeles
+    InitWindow(1280, 720, "Disparo al objetivo");
 
-    //Se carga la textura
-    pelo.loadPelota();
+    JUEGO Game;
 
-    //Los FPS se limitan a un máximo de 60
-    SetTargetFPS(60);
+    Game.game();
 
-    //Se inicia un bucle mientras la ventana no se cierre
-    while (!WindowShouldClose()) {
-
-        //Se mueve la pelota
-        pelo.movePelota();
-
-        pelo.GetCollision(borde);
-
-        //Comeienza a dibujar
-        BeginDrawing();
-
-        //Limpia el fondo y lo cambia a color rojo
-        ClearBackground(RED);
-
-        //Se dibuja la pelota
-        pelo.drawPelota();
-
-        //Se deja de dibujar
-        EndDrawing();
-    }
-
-    //Se libera el espacio ocupado por la pelota
-    pelo.unloadPelota();
-
-    //Se cierra la ventana
-    CloseWindow();
     return 0;
 }

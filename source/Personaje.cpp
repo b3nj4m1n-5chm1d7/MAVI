@@ -21,49 +21,9 @@ Color color = WHITE;
 //Se carga el audio y apariencia del personaje
 void Personaje::loadPer() {
     InitAudioDevice();
-    sonido = LoadSound("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/Sonidos/salto.mp3");
-    sprite = LoadTexture("C:/Users/Desktop/Downloads/Documentos MAVI/Raylib-vs2022 Limpio/Componentes/Sprites/hollow.png");
+    sonido = LoadSound("Componentes/Sonidos/disparo.mp3");
+    sprite = LoadTexture("Componentes/Sprites/hollow.png");
 };
-
-//Se le otorga una HitBox al jugador
-Rectangle Personaje::GetRect(){
-    return Rectangle{ pos.x, pos.y, float(sprite.width * escala), float(sprite.height * escala) };
-}
-
-//Se dibuja la HitBox en determinado momento
-void Personaje::drawHitBox(bool isColliding){
-    if (isColliding) {
-        pos = actual;
-        vidas -= 1;
-    }
-}
-
-void Personaje::dawHitBox(bool iColliding){
-    if (iColliding) {
-        pos = actual;
-        vidas -= 1;
-    }
-}
-
-void Personaje::rawHitBox(bool sColliding){
-    if (sColliding) {
-        pos = actual;
-        vidas -= 1;
-    }
-}
-
-void Personaje::draHitBox(bool Colliding){
-    if (Colliding) {
-        pos = actual;
-    }
-}
-
-void Personaje::AHitBox(bool Coliding){
-    if (Coliding) {
-        pos.y = 155;
-        salto = false;
-    }
-}
 
 void Personaje::movePer(){
 
